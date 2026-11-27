@@ -1,41 +1,32 @@
-// TEMPORARY style test page. We delete this later.
+import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
+import Placeholder from './pages/Placeholder';
+
 export default function App() {
   return (
-    <div className="main-content" style={{ marginLeft: 0 }}>
-      <h1>DoughDesk style test</h1>
+    <Routes>
+      {/* Public pages */}
+      <Route path="/" element={<Placeholder title="Landing" />} />
+      <Route path="/login" element={<Placeholder title="Login" />} />
+      <Route path="/register" element={<Placeholder title="Register" />} />
 
-      <button className="btn-primary">Primary</button>{' '}
-      <button className="btn-secondary">Secondary</button>
+      {/* Private pages: all share the Layout and need a login */}
+      <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+        <Route path="/dashboard" element={<Placeholder title="Dashboard" />} />
+        <Route path="/materials" element={<Placeholder title="Materials" />} />
+        <Route path="/products" element={<Placeholder title="Products" />} />
+        <Route path="/products/:id" element={<Placeholder title="Product detail" />} />
+        <Route path="/inventory" element={<Placeholder title="Inventory" />} />
+        <Route path="/costing" element={<Placeholder title="Costing" />} />
+        <Route path="/costing/:id" element={<Placeholder title="Cost breakdown" />} />
+        <Route path="/prices" element={<Placeholder title="Price comparison" />} />
+        <Route path="/profile" element={<Placeholder title="Profile" />} />
+        <Route path="/settings" element={<Placeholder title="Settings" />} />
+        <Route path="/help" element={<Placeholder title="Help" />} />
+      </Route>
 
-      <div className="alert alert-success" style={{ marginTop: 16 }}>Saved!</div>
-      <div className="alert alert-error">Something went wrong</div>
-      <div className="warning-box">A warning line</div>
-
-      <div className="stat-grid">
-        <div className="stat-card"><div className="stat-number">12</div>Materials</div>
-        <div className="stat-card"><div className="stat-number">4</div>Products</div>
-      </div>
-
-      <div className="card">
-        <h2>Materials</h2>
-        <div className="table-wrap">
-          <table>
-            <thead><tr><th>Name</th><th>Unit</th><th>Price</th><th></th></tr></thead>
-            <tbody>
-              <tr><td>Flour</td><td><span className="pill">kg</span></td><td>PKR 150.00</td>
-                <td><button className="btn-secondary btn-small">Edit</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="form-group">
-          <label>Name <span className="required">*</span></label>
-          <input type="text" />
-          <div className="error-text">Name is required</div>
-        </div>
-      </div>
-    </div>
+      <Route path="*" element={<Placeholder title="Page not found" />} />
+    </Routes>
   );
 }
