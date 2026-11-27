@@ -4,6 +4,7 @@ import { api } from '../api';
 const AuthContext = createContext(null);
 
 // Any component can call useAuth() to get { user, loading, login, register, logout }
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);
 }

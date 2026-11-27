@@ -2,18 +2,22 @@ import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import Placeholder from './pages/Placeholder';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import Landing from './pages/Landing';
 
 export default function App() {
   return (
     <Routes>
       {/* Public pages */}
-      <Route path="/" element={<Placeholder title="Landing" />} />
-      <Route path="/login" element={<Placeholder title="Login" />} />
-      <Route path="/register" element={<Placeholder title="Register" />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* Private pages: all share the Layout and need a login */}
       <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-        <Route path="/dashboard" element={<Placeholder title="Dashboard" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/materials" element={<Placeholder title="Materials" />} />
         <Route path="/products" element={<Placeholder title="Products" />} />
         <Route path="/products/:id" element={<Placeholder title="Product detail" />} />
